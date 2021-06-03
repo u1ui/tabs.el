@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width">
+
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/base.css/full.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/variables.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/classless.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/more.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/aria.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/simple.min.css">
+
+
+    <script src="./tabs.js" type=module></script>
+
+    <style>
+        html {
+            xbackground: linear-gradient(to bottom, #DBD65C88, #5614B088);
+        }
+        u1-tabs {
+            xbox-shadow:0 0 10px #0008;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>u1-tabs tests</h1>
+    </header>
+
+    <section>
+        <h2>Normal</h2>
+        <u1-tabs>
+            <h2 slot="title">Title</h2>
+            <section>content panel 1</section>
+            <h2 slot="title">Title 2</h2>
+            <section>content panel 2</section>
+            <h2 slot="title">Title 3</h2>
+            <section>content panel 3</section>
+        </u1-tabs>
+    </section>
+
+    <section>
+        <h2>max-height, chrome has a bug with this :( </h2>
+        <u1-tabs style="max-height:20rem">
+            <h2 slot="title">Title</h2>
+            <section>
+                <p>Phosfluorescently aggregate premium collaboration and idea-sharing through strategic e-commerce. Authoritatively negotiate error-free channels through value-added processes. Globally matrix superior manufactured products whereas dynamic markets. Authoritatively disintermediate sustainable initiatives via revolutionary quality vectors. Monotonectally expedite fully tested synergy before transparent imperatives.</p>
+                <p>Synergistically envisioneer team building ideas via competitive methodologies. Synergistically embrace sustainable relationships via adaptive benefits. Phosfluorescently integrate cross-unit technologies with cross-platform growth strategies. Globally reconceptualize bleeding-edge paradigms for turnkey technology. Interactively monetize efficient human capital rather than an expanded array of synergy.</p>
+                <p>Uniquely expedite interactive services rather than functionalized opportunities. Compellingly synthesize dynamic information and worldwide initiatives. Competently reintermediate sustainable networks through resource sucking manufactured products. Phosfluorescently synergize cross-platform mindshare and market-driven expertise. Competently innovate cutting-edge methodologies vis-a-vis fully researched action items.</p>
+                <p>Credibly maintain reliable synergy before cutting-edge leadership. Efficiently enable efficient strategic theme areas before timely ROI. Phosfluorescently integrate standardized customer service through cross functional synergy. Objectively matrix high-payoff expertise without standardized users. Monotonectally engineer B2B opportunities via functional supply chains.</p>
+                <p>Uniquely synthesize resource sucking leadership skills before multimedia based leadership skills. Interactively restore visionary innovation whereas end-to-end platforms. Compellingly evisculate client-centered human capital after value-added e-markets. Compellingly whiteboard high standards in vortals vis-a-vis.</p>
+            </section>
+            <h2 slot="title">Title 2</h2>
+            <section>content panel 2</section>
+            <h2 slot="title">Title 3</h2>
+            <section>content panel 3</section>
+        </u1-tabs>
+    </section>
+
+    <section>
+        <h2>Too many tabs</h2>
+        <u1-tabs>
+            <h2 slot="title">Title</h2>
+            <section>content panel 1</section>
+            <h2 slot="title">Title 2</h2>
+            <section>content panel 2</section>
+            <h2 slot="title">Title 3</h2>
+            <section>content panel 3</section>
+            <h2 slot="title">Title</h2>
+            <section>content panel 1</section>
+            <h2 slot="title">Title 2</h2>
+            <section>content panel 2</section>
+            <h2 slot="title">Title 3</h2>
+            <section>content panel 3</section>
+            <h2 slot="title">Title</h2>
+            <section>content panel 1</section>
+            <h2 slot="title">Title 2</h2>
+            <section>content panel 2</section>
+            <h2 slot="title">Title 3</h2>
+            <section>content panel 3</section>
+            <h2 slot="title">Title</h2>
+            <section>content panel 1</section>
+            <h2 slot="title">Title 2</h2>
+            <section>content panel 2</section>
+            <h2 slot="title">Title 3</h2>
+            <section>content panel 3</section>
+        </u1-tabs>
+    </section>
+
+    <section>
+        <h2>Nested</h2>
+        <u1-tabs>
+            <h2 slot="title">Title</h2>
+
+                <u1-tabs>
+                    <h3 slot="title">Item 1</h3>
+                    <section>Item 1 content</section>
+                    <h3 slot="title">Item 2</h3>
+                    <section>Item 2 content</section>
+                    <h3 slot="title">Item 3</h3>
+                    <section>Item 3 content</section>
+                    <h3 slot="title">Item 4</h3>
+                    <section>Item 1 content</section>
+                </u1-tabs>
+
+            <h2 slot="title">Title 2</h2>
+            <section>content panel 2</section>
+            <h2 slot="title">Title 3</h2>
+            <section>content panel 3</section>
+            <h2 slot="title">Title</h2>
+            <section>content panel 1</section>
+        </u1-tabs>
+    </section>
