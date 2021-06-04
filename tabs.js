@@ -41,7 +41,7 @@ customElements.define('u1-tabs', class extends HTMLElement {
         <slot id=tabs name=title role=tablist></slot>
         <slot id=panels></slot>
         `;
-        this.setAttribute('role', 'tablist');
+        //this.setAttribute('role', 'tablist');
     }
 
     get selected() {
