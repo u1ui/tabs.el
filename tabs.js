@@ -22,8 +22,9 @@ customElements.define('u1-tabs', class extends HTMLElement {
             font-size:1rem;
         }
         #panels {
-            flex:1 1 auto;
+            /*flex:1 1 auto; needed?*/
             display:grid;
+            overflow:auto; /* chrome bug, overflow:auto works not on slot-items */
             min-height: 0;
         }
         #panels::slotted(*)  {
@@ -83,10 +84,10 @@ customElements.define('u1-tabs', class extends HTMLElement {
         tabsSlot.removeEventListener('keydown', this._boundOnKeyDown);
     }
 
-    _onTitleClick(e) {
-        if (e.target.slot === 'title') {
-            this.selected = this.tabs.indexOf(e.target);
-            e.target.focus();
+    _onTitleClick({target}) {
+        if (target.slot === 'title') {
+            this.selected = this.tabs.indexOf(target);
+            target.focus();
         }
     }
 
