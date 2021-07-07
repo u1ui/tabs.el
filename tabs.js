@@ -97,14 +97,15 @@ customElements.define('u1-tabs', class extends HTMLElement {
             case 'ArrowLeft':
                 e.preventDefault();
                 var idx = this.selected - 1;
-                idx = idx < 0 ? this.tabs.length - 1 : idx;
-                this.tabs[idx].click();
+                //idx = idx < 0 ? this.tabs.length - 1 : idx;
+                this.tabs[idx] && this.tabs[idx].click();
                 break;
             case 'ArrowDown':
             case 'ArrowRight':
                 e.preventDefault();
                 var idx = this.selected + 1;
-                this.tabs[idx % this.tabs.length].click();
+                //this.tabs[idx % this.tabs.length].click();
+                this.tabs[idx] && this.tabs[idx].click();
                 break;
             default:
                 break;
