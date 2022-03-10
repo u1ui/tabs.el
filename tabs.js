@@ -24,17 +24,13 @@ customElements.define('u1-tabs', class extends HTMLElement {
             flex:0 0 auto;
             display:flex;
             overflow:hidden;
-
             scroll-padding: 3rem;
             /*
             scroll-snap-align: center;
             scroll-snap-type: x mandatory;
             */
         }
-        #tabs::slotted(*) {
-        }
         #panels {
-            /*flex:1 1 auto; needed?*/
             display:grid;
             overflow:auto; /* chrome bug, overflow:auto works not on slot-items, zzz fixed in v94 */
             min-height: 0;
