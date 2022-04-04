@@ -25,14 +25,10 @@ customElements.define('u1-tabs', class extends HTMLElement {
             display:flex;
             overflow:hidden;
             scroll-padding: 3rem;
-            /*
-            scroll-snap-align: center;
-            scroll-snap-type: x mandatory;
-            */
         }
         #panels {
             display:grid;
-            overflow:auto; /* chrome bug, overflow:auto works not on slot-items, zzz fixed in v94 */
+            overflow:auto;
             min-height: 0;
         }
         #panels::slotted(*)  {
@@ -47,23 +43,22 @@ customElements.define('u1-tabs', class extends HTMLElement {
             z-index:-1;
         }
         </style>
-        <slot id=tabs name=title role=tablist></slot>
-        <slot id=panels></slot>
+        <slot part=tablist id=tabs name=title role=tablist></slot>
+        <slot part=panels id=panels></slot>
         `;
         // Save refer to we can remove listeners later.
         this._onTitleClick = this._onTitleClick.bind(this);
         this._onKeyDown = this._onKeyDown.bind(this);
-
     }
 
     get selected() {
         return this._selected;
     }
 
-    set selected(idx) {
-        this._selected = idx;
-        this._selectTab(idx);
-        this.setAttribute('selected', idx);
+    set selected(index) {
+        this._selected = index;
+        this._selectTab(index);
+        this.setAttribute('selected', index);
     }
 
     connectedCallback() {
@@ -72,9 +67,7 @@ customElements.define('u1-tabs', class extends HTMLElement {
 
 
         for (let child of this.children) {
-            if (tagToTab[child.tagName]) {
-                child.slot = 'title';
-            }
+            if (tagToTab[child.tagName]) child.slot = 'title';
         }
 
         this.tabs = tabsSlot.assignedNodes({flatten: true});
@@ -87,7 +80,6 @@ customElements.define('u1-tabs', class extends HTMLElement {
             panel.setAttribute('role', 'tabpanel');
             panel.setAttribute('tabindex', 0);
         }
-
 
         tabsSlot.addEventListener('click', this._onTitleClick);
         tabsSlot.addEventListener('keydown', this._onKeyDown);
@@ -103,39 +95,43 @@ customElements.define('u1-tabs', class extends HTMLElement {
 
     _onTitleClick({target}) {
         if (target.slot === 'title') {
+
+            // beta
+            let event = new CustomEvent('u1-activate', { bubbles: true, cancelable: true });
+            target.dispatchEvent(event);
+            if (event.defaultPrevented) return;
+
             this.selected = this.tabs.indexOf(target);
             target.focus();
+            // target.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'}); // scrolls also the viewport...
         }
     }
 
     _onKeyDown(e) {
+        if (e.ctrlKey || e.altKey || e.metaKey) return;
+        let index;
         switch (e.code) {
-            case 'ArrowUp':
-            case 'ArrowLeft':
-                e.preventDefault();
-                var idx = this.selected - 1;
-                //idx = idx < 0 ? this.tabs.length - 1 : idx;
-                this.tabs[idx] && this.tabs[idx].click();
+            case 'ArrowUp': case 'ArrowLeft':
+                index = this.selected - 1;
                 break;
-            case 'ArrowDown':
-            case 'ArrowRight':
-                e.preventDefault();
-                var idx = this.selected + 1;
-                //this.tabs[idx % this.tabs.length].click();
-                this.tabs[idx] && this.tabs[idx].click();
+            case 'ArrowDown': case 'ArrowRight':
+                index = this.selected + 1;
                 break;
             default:
-                break;
+                return
         }
+        e.preventDefault();
+        this.tabs[index] && this.tabs[index].click();
+
     }
 
     _findFirstSelectedTab() {
-        let selectedIdx;
+        let index;
         for (let [i, tab] of this.tabs.entries()) {
             tab.setAttribute('role', 'tab');
-            if (tab.hasAttribute('selected')) selectedIdx = i; // select last [selected]
+            if (tab.hasAttribute('selected')) index = i;
         }
-        return selectedIdx;
+        return index;
     }
 
     _selectTab(idx = null) {
@@ -148,3 +144,30 @@ customElements.define('u1-tabs', class extends HTMLElement {
     }
 
 });
+
+// beta, does not work if initial u1-target is already fired
+// problem: sometimes, on initial load, the event is fired before the listener is added
+document.addEventListener('u1-target', e => {
+    let tabs = document.querySelectorAll('u1-tabs > :target');
+    for (let tab of tabs) tab.click();
+});
+
+
+/* slide
+:host #panels {
+    border: 2px solid;
+    display:flex;
+    overflow:hidden;
+}
+:host #panels::slotted(*) {
+    flex:1 0 100%;
+    opacity:1;
+    visibility:visible;
+}
+_selectTab(idx = null) {
+    for (let i = 0, tab; tab = this.tabs[i]; ++i) {
+        ...
+        //if (select) this.panels[i].scrollIntoView({behavior: 'smooth'});
+    }
+}
+*/

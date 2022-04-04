@@ -14,10 +14,10 @@ u1-tabs [role="tab"] {
     border-radius: 0;
     white-space: nowrap;
     cursor: pointer;
-    font-weight:bold;
-    padding: calc(var(--gap) / 4) calc(var(--gap) / 2);
+    padding: .2rem .6rem;
     margin: 0;
     font-size:1rem;
+    font-weight:bold;
     outline:0;
 }
 

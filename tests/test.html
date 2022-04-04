@@ -13,7 +13,10 @@
 
 
     <link rel=stylesheet href="../tabs.css">
+    <script src="http://localhost/u1ui/navigatable.attr/navigatable.js" type=module></script>
     <script src="../tabs.js" type=module></script>
+
+
 
     <style>
         html {
@@ -39,6 +42,18 @@
             <div slot=title>Div as Tab</div>
             <section>If you like to use other Elements as tabs, you have to add the attribute <code>slot="title"</code></section>
             <h2>Title 3</h2>
+            <section>content panel 3</section>
+        </u1-tabs>
+    </section>
+
+    <section>
+        <h2>Tablist browser-navigatable tabs</h2>
+        <u1-tabs>
+            <h2 u1-navigatable id="nav1">H2 as Tab</h2>
+            <section>Heading Elements (h1-h6) are automatically used as tabs</section>
+            <div slot=title u1-navigatable id="nav2">Div as Tab</div>
+            <section>If you like to use other Elements as tabs, you have to add the attribute <code>slot="title"</code></section>
+            <h2 u1-navigatable id="nav3">Title 3</h2>
             <section>content panel 3</section>
         </u1-tabs>
     </section>
@@ -94,18 +109,77 @@
     <section>
         <h2>Nested</h2>
         <u1-tabs>
-            <h2>Title</h2>
+            <h2>Title 1</h2>
 
                 <u1-tabs>
-                    <h3>Item 1</h3>
+                    <h3>Item 1.1</h3>
                     <section>Item 1 content</section>
-                    <h3>Item 2</h3>
+                    <h3>Item 1.2</h3>
                     <section>Item 2 content</section>
-                    <h3>Item 3</h3>
+                    <h3>Item 1.3</h3>
                     <section>Item 3 content</section>
-                    <h3>Item 4</h3>
+                    <h3>Item 1.4</h3>
                     <section>Item 1 content</section>
                 </u1-tabs>
+
+            <h2>Title 2</h2>
+            <section>content panel 2</section>
+            <h2>Title 3</h2>
+            <section>content panel 3</section>
+            <h2>Title</h2>
+            <section>content panel 1</section>
+        </u1-tabs>
+    </section>
+
+
+    <style>
+        #styled u1-tabs {
+            border-radius: .5rem;
+            border:1px solid;
+            overflow:hidden;
+            box-shadow:var(--shadow);
+        }
+        #styled u1-tabs::part(tablist) {
+            justify-content: center;
+            color:#fff;
+            background:var(--color);
+        }
+        #styled u1-tabs::part(panels) {
+            background:#eee8;
+        }
+        #styled u1-tabs [role="tab"] {
+            padding:.5rem 1rem;
+        }
+        #styled u1-tabs [role="tab"][aria-selected="true"] {
+            border-bottom-color: transparent;
+            background:#0003;
+        }
+        #styled u1-tabs [role="tab"]:focus {
+            border-bottom-color: transparent;
+            background:#0005;
+        }
+        #styled [role=tabpanel] {
+            transition:.6s;
+        }
+    </style>
+
+    <section id=styled>
+        <h2>Nested, styled</h2>
+        <u1-tabs>
+            <h2>Title 1</h2>
+
+                <div>
+                    <u1-tabs>
+                        <h3>Item 1.1</h3>
+                        <section>Item 1 content</section>
+                        <h3>Item 1.2</h3>
+                        <section>Item 2 content</section>
+                        <h3>Item 1.3</h3>
+                        <section>Item 3 content</section>
+                        <h3>Item 1.4</h3>
+                        <section>Item 1 content</section>
+                    </u1-tabs>
+                </div>
 
             <h2>Title 2</h2>
             <section>content panel 2</section>
