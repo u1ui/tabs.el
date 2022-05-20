@@ -30,6 +30,6 @@ u1-tabs [role="tab"]:hover, [role="tab"]:focus {
 }
 
 u1-tabs [role="tabpanel"] {
-    padding: var(--gap, 1rem);
+    padding: 1rem;
     /* overflow: auto; */
 }
