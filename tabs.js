@@ -23,8 +23,16 @@ customElements.define('u1-tabs', class extends HTMLElement {
         #tabs {
             flex:0 0 auto;
             display:flex;
-            overflow:hidden;
+            xoverflow:hidden;
             scroll-padding: 3rem;
+
+            overflow: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;  /* hide scrollbars Firefox */
+
+        }
+        #tabs::-webkit-scrollbar {
+            display: none;  /* hide scrollbars (Safari and Chrome) */
         }
         #panels {
             display:grid;
@@ -139,6 +147,13 @@ customElements.define('u1-tabs', class extends HTMLElement {
             let select = i === idx;
             tab.setAttribute('tabindex', select ? 0 : -1);
             tab.setAttribute('aria-selected', select);
+            if (select) {
+                tab.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
             this.panels[i].setAttribute('aria-hidden', !select);
         }
     }
