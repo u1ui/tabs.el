@@ -7,6 +7,7 @@ const tagToTab = {
     H4:1,
     H5:1,
     H6:1,
+    H6:1,
 };
 
 customElements.define('u1-tabs', class extends HTMLElement {
@@ -93,7 +94,7 @@ customElements.define('u1-tabs', class extends HTMLElement {
         // Add aria role="tabpanel" to each content panel.
         for (let [i, panel] of this.panels.entries()) {
             panel.setAttribute('role', 'tabpanel');
-            panel.setAttribute('tabindex', 0);
+            //panel.setAttribute('tabindex', 0); zzz
         }
 
         tabsSlot.addEventListener('click', this._onTitleClick);
@@ -111,14 +112,13 @@ customElements.define('u1-tabs', class extends HTMLElement {
     _onTitleClick({target}) {
         if (target.slot === 'title') {
 
-            // beta, should not be here but in "set selected"?
+            // beta, should not be here but in "_selectTab"?
             let event = new CustomEvent('u1-activate', { bubbles: true, cancelable: true });
             target.dispatchEvent(event);
             if (event.defaultPrevented) return;
 
             this.selected = this.tabs.indexOf(target);
             target.focus();
-            // target.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'}); // scrolls also the viewport...
         }
     }
 
@@ -161,6 +161,7 @@ customElements.define('u1-tabs', class extends HTMLElement {
                     inline: 'center'
                 });
             }
+            this.panels[i].setAttribute('tabindex', select ? 0 : -1);
             //this.panels[i].setAttribute('aria-hidden', !select);
             if (select) {
                 this.panels[i].removeAttribute('hidden');
