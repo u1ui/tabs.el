@@ -13,25 +13,17 @@
 
 
     <link rel=stylesheet href="../tabs.css">
-    <script src="http://localhost/u1ui/navigatable.attr/navigatable.js" type=module></script>
     <script src="../tabs.js" type=module></script>
 
+    <script type=module src=https://cdn.jsdelivr.net/gh/u1ui/navigatable.attr@x/navigatable.js crossorigin></script>
 
-
-    <style>
-        html {
-            xbackground: linear-gradient(to bottom, #DBD65C88, #5614B088);
-        }
-        u1-tabs {
-            xbox-shadow:0 0 10px #0008;
-        }
-    </style>
 </head>
 
 <body>
 
     <header>
         <h1>u1-tabs tests</h1>
+        As you use the browsers search funktion, you find the contents of the tab-panels.
     </header>
 
     <section>
@@ -47,7 +39,7 @@
     </section>
 
     <section>
-        <h2>Tablist browser-navigatable tabs</h2>
+        <h2>Tablist browser-navigatable tabs (beta)</h2>
         <u1-tabs>
             <h2 u1-navigatable id="nav1">H2 as Tab</h2>
             <section>Heading Elements (h1-h6) are automatically used as tabs</section>
