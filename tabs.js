@@ -36,8 +36,9 @@ customElements.define('u1-tabs', class extends HTMLElement {
         }
         #panels::slotted(*)  {
             grid-area:1/1;
-            opacity:1;
             overflow:auto;
+            opacity:1;
+            display:block;
         }
         #panels::slotted([hidden="until-found"]) {
             content-visibility: visible;
@@ -110,7 +111,7 @@ customElements.define('u1-tabs', class extends HTMLElement {
     _onTitleClick({target}) {
         if (target.slot === 'title') {
 
-            // beta
+            // beta, should not be here but in "set selected"?
             let event = new CustomEvent('u1-activate', { bubbles: true, cancelable: true });
             target.dispatchEvent(event);
             if (event.defaultPrevented) return;
