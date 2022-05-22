@@ -23,31 +23,25 @@ customElements.define('u1-tabs', class extends HTMLElement {
         #tabs {
             flex:0 0 auto;
             display:flex;
-            xoverflow:hidden;
-            scroll-padding: 3rem;
-
             overflow: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;  /* hide scrollbars Firefox */
-
         }
         #tabs::-webkit-scrollbar {
             display: none;  /* hide scrollbars (Safari and Chrome) */
         }
         #panels {
             display:grid;
-            overflow:auto;
             min-height: 0;
         }
         #panels::slotted(*)  {
             grid-area:1/1;
             opacity:1;
-            visibility:visible;
             overflow:auto;
         }
-        #panels::slotted([aria-hidden="true"]) {
+        #panels::slotted([hidden="until-found"]) {
+            content-visibility: visible;
             opacity:0;
-            visibility:hidden;
             z-index:-1;
         }
         </style>
@@ -57,6 +51,18 @@ customElements.define('u1-tabs', class extends HTMLElement {
         // Save refer to we can remove listeners later.
         this._onTitleClick = this._onTitleClick.bind(this);
         this._onKeyDown = this._onKeyDown.bind(this);
+
+        this.addEventListener('beforematch', e=>{
+            let el = e.target;
+            while (el && el.parentNode) {
+                if (el.parentNode === this) {
+                    e.preventDefault();
+                    this.selected = this.tabs.indexOf(el.previousElementSibling);
+                    return;
+                }
+                el = el.parentElement;
+            }
+        })
     }
 
     get selected() {
@@ -154,7 +160,12 @@ customElements.define('u1-tabs', class extends HTMLElement {
                     inline: 'center'
                 });
             }
-            this.panels[i].setAttribute('aria-hidden', !select);
+            //this.panels[i].setAttribute('aria-hidden', !select);
+            if (select) {
+                this.panels[i].removeAttribute('hidden');
+            } else {
+                this.panels[i].setAttribute('hidden', 'until-found');
+            }
         }
     }
 
