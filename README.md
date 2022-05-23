@@ -27,6 +27,7 @@ Tabs-Component
 ```
 
 
-## Demo
+## Demos
+https://raw.githack.com/u1ui/tabs.el/main/tests/minimal.html  
 https://raw.githack.com/u1ui/tabs.el/main/tests/test.html  
 
