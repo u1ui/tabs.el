@@ -29,11 +29,11 @@ customElements.define('u1-tabs', class extends HTMLElement {
             scrollbar-width: none;  /* hide scrollbars Firefox */
         }
         #tabs::-webkit-scrollbar {
-            display: none;  /* hide scrollbars (Safari and Chrome) */
+            display:none;  /* hide scrollbars (Safari and Chrome) */
         }
         #panels {
             display:grid;
-            min-height: 0;
+            min-height:0;
         }
         #panels::slotted(*)  {
             grid-area:1/1;
@@ -42,7 +42,7 @@ customElements.define('u1-tabs', class extends HTMLElement {
             display:block;
         }
         #panels::slotted([hidden="until-found"]) {
-            content-visibility: visible;
+            content-visibility:visible;
             opacity:0;
             z-index:-1;
         }
