@@ -76,26 +76,41 @@ customElements.define('u1-tabs', class extends HTMLElement {
         this._selectTab(index);
         this.setAttribute('selected', index);
     }
+    _selectTab(idx = null) { // todo? merge into `set selected()`?
+        for (let i = 0, tab; tab = this.tabs[i]; ++i) {
+            let select = i === idx;
+            tab.setAttribute('tabindex', select ? 0 : -1);
+            tab.setAttribute('aria-selected', select);
+            this.panels[i].setAttribute('tabindex', select ? 0 : -1);
+            if (select) {
+                this.panels[i].removeAttribute('hidden');
+            } else {
+                this.panels[i].setAttribute('hidden', 'until-found');
+            }
+        }
+    }
 
     connectedCallback() {
         const tabsSlot = this.shadowRoot.querySelector('#tabs');
         const panelsSlot = this.shadowRoot.querySelector('#panels');
 
+        for (let child of this.children) if (tagToTab[child.tagName]) child.slot = 'title';
 
-        for (let child of this.children) {
-            if (tagToTab[child.tagName]) child.slot = 'title';
+        const update = ()=>{
+            this.tabs = tabsSlot.assignedNodes({flatten: true});
+            this.panels = panelsSlot.assignedNodes({flatten: true}).filter(el => el.nodeType === Node.ELEMENT_NODE);
+            for (let panel of this.panels.values()) {
+                panel.setAttribute('role', 'tabpanel');
+            }
+            for (let tab of this.tabs.values()) {
+                tab.setAttribute('role', 'tab');
+            }
+            this.selected = this.selected;
         }
 
-        this.tabs = tabsSlot.assignedNodes({flatten: true});
-        this.panels = panelsSlot.assignedNodes({flatten: true}).filter(el => {
-            return el.nodeType === Node.ELEMENT_NODE;
-        });
-
-        // Add aria role="tabpanel" to each content panel.
-        for (let [i, panel] of this.panels.entries()) {
-            panel.setAttribute('role', 'tabpanel');
-            //panel.setAttribute('tabindex', 0); zzz
-        }
+        update();
+        tabsSlot.addEventListener('slotchange', update);
+        panelsSlot.addEventListener('slotchange', update);
 
         tabsSlot.addEventListener('click', this._onTitleClick);
         tabsSlot.addEventListener('keydown', this._onKeyDown);
@@ -110,7 +125,7 @@ customElements.define('u1-tabs', class extends HTMLElement {
     }
 
     _onTitleClick({target}) {
-        if (target.slot === 'title') {
+        if (target.slot === 'title') { // todo closest?
 
             // beta, should not be here but in "_selectTab"?
             let event = new CustomEvent('u1-activate', { bubbles: true, cancelable: true });
@@ -118,6 +133,13 @@ customElements.define('u1-tabs', class extends HTMLElement {
             if (event.defaultPrevented) return;
 
             this.selected = this.tabs.indexOf(target);
+
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+
             target.focus();
         }
     }
@@ -143,32 +165,9 @@ customElements.define('u1-tabs', class extends HTMLElement {
     _findFirstSelectedTab() {
         let index;
         for (let [i, tab] of this.tabs.entries()) {
-            tab.setAttribute('role', 'tab');
             if (tab.hasAttribute('selected')) index = i;
         }
         return index;
-    }
-
-    _selectTab(idx = null) {
-        for (let i = 0, tab; tab = this.tabs[i]; ++i) {
-            let select = i === idx;
-            tab.setAttribute('tabindex', select ? 0 : -1);
-            tab.setAttribute('aria-selected', select);
-            if (select) {
-                tab.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest',
-                    inline: 'center'
-                });
-            }
-            this.panels[i].setAttribute('tabindex', select ? 0 : -1);
-            //this.panels[i].setAttribute('aria-hidden', !select);
-            if (select) {
-                this.panels[i].removeAttribute('hidden');
-            } else {
-                this.panels[i].setAttribute('hidden', 'until-found');
-            }
-        }
     }
 
 });
