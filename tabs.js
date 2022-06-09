@@ -50,6 +50,8 @@ customElements.define('u1-tabs', class extends HTMLElement {
         <slot part=tablist id=tabs name=title role=tablist></slot>
         <slot part=panels id=panels></slot>
         `;
+        // slot tablist: when i add tabindex=-1, tabs are also no more keyboard focusable! (tested ch,ff) Why?
+
         // Save refer to we can remove listeners later.
         this._onTitleClick = this._onTitleClick.bind(this);
         this._onKeyDown = this._onKeyDown.bind(this);
@@ -81,7 +83,7 @@ customElements.define('u1-tabs', class extends HTMLElement {
             let select = i === idx;
             tab.setAttribute('tabindex', select ? 0 : -1);
             tab.setAttribute('aria-selected', select);
-            this.panels[i].setAttribute('tabindex', select ? 0 : -1);
+            this.panels[i].setAttribute('tabindex', select ? 0 : -1); // chrome needs tabindex=-1 for scrollable areas
             if (select) {
                 this.panels[i].removeAttribute('hidden');
             } else {
