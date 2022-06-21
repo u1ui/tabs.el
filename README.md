@@ -25,11 +25,6 @@ rendering tabs
 </u1-tabs>
 ```
 
-## Demos
-
-https://raw.githack.com/u1ui/tabs.el/main/tests/minimal.html  
-https://raw.githack.com/u1ui/tabs.el/main/tests/test.html
-
 ## Install
 
 ```html
@@ -37,12 +32,13 @@ https://raw.githack.com/u1ui/tabs.el/main/tests/test.html
 <script src="https://cdn.jsdelivr.net/gh/u1ui/tabs.el@3.0.0/tabs.min.js" type=module>
 ```
 
-## Demo
+## Demos
 
-https://raw.githack.com/u1ui/tabs.el/main/tests/minimal.html  
-https://raw.githack.com/u1ui/tabs.el/main/tests/test.html  
+[minimal.html](https://raw.githack.com/u1ui/tabs.el/main/tests/minimal.html)  
+[test.html](https://raw.githack.com/u1ui/tabs.el/main/tests/test.html)  
 
 ## About
 
 - MIT License, Copyright (c) 2022 <u1> (like all repositories in this organization) <br>
 - Suggestions, ideas, finding bugs and making pull requests make us very happy. ♥
+
