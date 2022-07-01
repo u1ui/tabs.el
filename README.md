@@ -25,6 +25,12 @@ rendering tabs
 </u1-tabs>
 ```
 
+```css
+u1-tabs {
+    max-height:30rem;
+}
+```
+
 ## Install
 
 ```html
@@ -34,8 +40,8 @@ rendering tabs
 
 ## Demos
 
-[minimal.html](https://raw.githack.com/u1ui/tabs.el/main/tests/minimal.html)  
-[test.html](https://raw.githack.com/u1ui/tabs.el/main/tests/test.html)  
+[minimal.html](http://gcdn.li/u1ui/tabs.el@main/tests/minimal.html)  
+[test.html](http://gcdn.li/u1ui/tabs.el@main/tests/test.html)  
 
 ## About
 
