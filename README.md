@@ -34,8 +34,8 @@ u1-tabs {
 ## Install
 
 ```html
-<link href="https://cdn.jsdelivr.net/gh/u1ui/tabs.el@3.0.0/tabs.min.css" rel=stylesheet>
-<script src="https://cdn.jsdelivr.net/gh/u1ui/tabs.el@3.0.0/tabs.min.js" type=module>
+<link href="https://cdn.jsdelivr.net/gh/u1ui/tabs.el@x.x.x/tabs.min.css" rel=stylesheet>
+<script src="https://cdn.jsdelivr.net/gh/u1ui/tabs.el@x.x.x/tabs.min.js" type=module>
 ```
 
 ## Demos
