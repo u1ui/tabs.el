@@ -35,7 +35,7 @@ u1-tabs {
 
 ```html
 <link href="https://cdn.jsdelivr.net/gh/u1ui/tabs.el@x.x.x/tabs.min.css" rel=stylesheet>
-<script src="https://cdn.jsdelivr.net/gh/u1ui/tabs.el@x.x.x/tabs.min.js" type=module>
+<script src="https://cdn.jsdelivr.net/gh/u1ui/tabs.el@x.x.x/tabs.min.js" type=module></script>
 ```
 
 ## Demos
