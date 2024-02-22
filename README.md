@@ -8,7 +8,7 @@ rendering tabs
 - Navigateable through keys
 - Content is searchable (using `hidden=until-found`)
 
-## Ussage
+## Usage
 
 ```html
 <u1-tabs>
